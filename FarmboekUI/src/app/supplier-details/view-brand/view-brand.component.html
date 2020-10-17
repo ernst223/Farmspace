@@ -1,0 +1,29 @@
+<div fxLayoutAlign="center center">
+    <div fxFlex.gt-sm="55" fxFlex="95">
+        <mat-card *ngIf="displayMe()">
+            <img src={{getImageUrl()}}>
+            <h1>Brand - {{myBrand.name}}</h1>
+            <h2>Contact Information</h2>
+            <p *ngIf="myContact.fullName != undefined"><b>FullName:</b> {{myContact.fullName}}</p>
+            <p *ngIf="myContact.telNumber != undefined"><b>Tel:</b> {{myContact.telNumber}}</p>
+            <p *ngIf="myContact.cellNumber != undefined"><b>Cell:</b> {{myContact.cellNumber}}</p>
+            <p *ngIf="myBrand.address != undefined"><b>Address: </b>{{myBrand.address}}</p>
+            <p *ngIf="myContact.email != undefined"><b>Email: </b>{{myContact.email}}</p>
+            <p *ngIf="myContact.website != undefined"><b>Website: </b><a
+                    href="{{myContact.website}}">{{myContact.website}}</a></p>
+            <div style="margin-top: 10px; margin-bottom: 5px;" *ngIf="myBrand.description != undefined">
+                <h2>About</h2>
+                <p>{{myBrand.description}}</p>
+            </div>
+            <button (click)="viewSupplierClick()" style="margin: 10px" matTooltip="View The Suppliers" mat-raised-button
+                color="primary">View Suppliers</button>
+            <button *ngIf="!viewProducts" (click)="viewProductClick()" style="margin: 10px"
+                matTooltip="View all Products" mat-raised-button color="primary">View Products</button>
+            <button *ngIf="viewProducts" (click)="viewProductClick()" style="margin: 10px"
+                matTooltip="Close Products page" mat-raised-button color="primary">Close Products</button>
+            <div *ngIf="viewProducts">
+                <app-products [myInput]="myBrand.brandId"></app-products>
+            </div>
+        </mat-card>
+    </div>
+</div>

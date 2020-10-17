@@ -1,0 +1,26 @@
+<div *ngIf="canIdisplay">
+    <!-- <mat-chip-list fxLayout="row wrap">
+        <mat-chip class="chip-image" *ngFor="let entity of myInput" color="primary" (click)="ChipClicked(entity.id)">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <img *ngIf="entity.imageLink != undefined" class="left-image-chip" src={{getImageConnectionString(entity.imageLink)}} />
+                <div class="chip-text" fxFlex="grow" fxFlex.gt-md="fill">
+                    {{entity.range}}
+                </div>
+            </div>
+        </mat-chip>
+    </mat-chip-list> -->
+    <h2>Products by Brand</h2>
+    <div *ngFor="let brand of myBrands">
+        <h3><a [routerLink]="['/details/brand',brand.id]">{{brand.name}}</a></h3>
+        <mat-chip-list fxLayout="row wrap">
+                <mat-chip class="chip-image" *ngFor="let entity of getBrandEntries(brand.id)" color="primary" (click)="ChipClicked(entity.entryId)">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <img *ngIf="entity.imageLink != undefined" class="left-image-chip" src={{getImageConnectionString(entity.imageLink)}} />
+                        <div class="chip-text" fxFlex="grow" fxFlex.gt-md="fill">
+                            {{entity.range}}
+                        </div>
+                    </div>
+                </mat-chip>
+            </mat-chip-list>
+    </div>
+</div>

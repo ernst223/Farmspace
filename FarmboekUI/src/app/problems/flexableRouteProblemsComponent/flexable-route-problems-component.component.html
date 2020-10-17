@@ -1,0 +1,12 @@
+<div>
+    <mat-chip-list fxLayout="row wrap">
+        <mat-chip class="chip-image" *ngFor="let entity of myInput" color="primary" (click)="ChipClicked(entity.id)">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <img class="left-image-chip" src={{getImageConnectionString(entity.imageLink)}} />
+                <div class="chip-text" fxFlex="grow" fxFlex.gt-md="fill">
+                    {{entity.problem}}
+                </div>
+            </div>
+        </mat-chip>
+    </mat-chip-list>
+</div>

@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Warning</h1>
+<h2>You are about to delete the child entries, are you sure?</h2>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+</div>

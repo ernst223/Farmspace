@@ -1,0 +1,17 @@
+// Import Fuse core library
+@import "@fuse/scss/core";
+@import '~@ngx-share/button/themes/default/default-theme';
+// Import app.theme.scss
+@import "app/app.theme";
+
+.mat-vertical-content{
+    padding: 16px !important;
+}
+
+.small-buttons{
+    font-size: 10px;
+}
+
+toolbar .logo{
+    border-radius: 0 !important;
+}

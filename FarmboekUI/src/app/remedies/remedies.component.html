@@ -1,0 +1,72 @@
+
+    <div fxFlex.gt-sm="55" fxFlex="95">
+        <mat-card>
+                <h2>{{remedyDetails.name}} Details</h2>
+                <button style="margin: 10px" matTooltip="Enquire for this Product" mat-raised-button color="primary"
+                    (click)="enquire()">Enquire</button>
+                <img *ngIf="remedyDetails.imageLink != undefined" class="product-image"
+                    style="height: 100px; width: 100px;" src="{{getImageConnectionString(remedyDetails.imageLink)}}">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>
+                                Brand
+                            </th>
+                            <td>
+                                <a [routerLink]="['/details/brand',brand.brandId]">{{brand.name}}</a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="remedyDetails.registration != undefined">
+                            <th>
+                                Registration
+                            </th>
+                            <td>
+                                {{remedyDetails.registration}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="remedyDetails.formulation != undefined">
+                            <th>
+                                Formulation
+                            </th>
+                            <td>
+                                {{remedyDetails.formulation}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="remedyDetails.concentration != undefined">
+                            <th>
+                                Concentration
+                            </th>
+                            <td>
+                                {{remedyDetails.concentration}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="showActiveIngredient()">
+                            <th>
+                                Active Ingredients
+                            </th>
+                            <td>
+                                <div *ngFor="let item of myActiveIngredients">
+                                    <p>{{item.name}}</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <th>
+                                Problems
+                            </th>
+                            <td>
+                                <div *ngIf="!displayRemedyProblems">
+                                    <mat-spinner></mat-spinner>
+                                </div>
+                                <div *ngIf="displayRemedyProblems">
+                                    <div *ngFor="let item of remedyProblems">
+                                        <a
+                                            [routerLink]="['/problemsAndSolutions/problembase',item.problemBaseId]">{{item.description}}</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </mat-card>
+    </div>

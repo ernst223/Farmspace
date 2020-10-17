@@ -1,0 +1,35 @@
+<div fxLayoutAlign="center center">
+    <div fxFlex.gt-sm="55" fxFlex="95">
+        <mat-card *ngIf="displayMe()">
+            <img src={{getImageUrl()}}>
+            <h1>Supplier - {{mySupplier.supplierName}}</h1>
+                <h2>Contact Information</h2>
+                <p *ngIf="mySupplier.supplierTel1 != undefined"><b>Tel:</b> {{mySupplier.supplierTel1}}</p>
+                <p *ngIf="mySupplier.supplierTel2 != undefined"><b>Tel:</b> {{mySupplier.supplierTel2}}</p>
+                <p *ngIf="mySupplier.supplierCity != undefined"><b>City: </b>{{mySupplier.supplierCity}}</p>
+                <p *ngIf="mySupplier.supplierPostCode != undefined"><b>Postal code: </b>{{mySupplier.supplierPostCode}}
+                </p>
+                <p *ngIf="mySupplier.supplierAddress1 != undefined"><b>Address: </b>{{mySupplier.supplierAddress1}}</p>
+                <p *ngIf="mySupplier.supplierAddress2 != undefined"><b>Email: </b>{{mySupplier.supplierAddress2}}</p>
+
+                <div style="margin-top: 10px; margin-bottom: 5px;" *ngIf="mySupplier.supplierDesc != undefined">
+                    <h2>About us</h2>
+                    <p>{{mySupplier.supplierDesc}}</p>
+                </div>
+            </mat-card>
+            <button *ngIf="!viewBrands" (click)="viewBrandsClick()" style="margin: 10px" matTooltip="View all Brands"
+                mat-raised-button color="primary">View Brands</button>
+            <button *ngIf="viewBrands" (click)="viewBrandsClick()" style="margin: 10px" matTooltip="Close Brands page"
+                mat-raised-button color="primary">Close Brands</button>
+            <button *ngIf="!viewProducts" (click)="viewProductClick()" style="margin: 10px"
+                matTooltip="View all Products" mat-raised-button color="primary">View Products</button>
+            <button *ngIf="viewProducts" (click)="viewProductClick()" style="margin: 10px"
+                matTooltip="Close Products page" mat-raised-button color="primary">Close Products</button>
+            <div *ngIf="viewProducts">
+                <app-products [myInput]="mySupplier.supplierId"></app-products>
+            </div>
+            <div *ngIf="viewBrands">
+                <app-brands [myInput]="mySupplier.supplierId"></app-brands>
+            </div>
+    </div>
+</div>

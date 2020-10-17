@@ -1,0 +1,102 @@
+<div fxLayout="row wrap">
+
+    <drag-scroll fxFlex="100"  fxHide.gt-md>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/problemsAndSolutions']"
+            routerLinkActive="router-link-active">Problems
+            &
+            Solutions</a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/productsAndServices']"
+            routerLinkActive="router-link-active">
+            Products & Services
+        </a>
+        <a drag-scroll-item class="side-scroll-item" href="https://www.ventusky.com/?p=-26.9;24.7;4&l=temperature"
+            routerLinkActive="router-link-active">
+            Interactive Map
+
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/appspage']" routerLinkActive="router-link-active">
+            Applications
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/home/videoMedia']" routerLinkActive="router-link-active">
+            Videos
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/home/articleMedia']" routerLinkActive="router-link-active">
+            Articles
+        </a>
+    </drag-scroll>
+
+    <div fxLayout="row wrap" fxFlex="100" fxLayoutAlign="center center">
+        <fuse-sidebar class="sidebar" name="simple-left-sidebar-1" position="left">
+
+            <!-- SIDEBAR CONTENT -->
+            <div class="content p-24">
+                <div class="demo-sidebar">
+                    <mat-list>
+                        <mat-list-item>
+                            <a class="side-menu-item" [routerLink]="['/problemsAndSolutions']"
+                                routerLinkActive="router-link-active">Problems
+                                &
+                                Solutions</a>
+                        </mat-list-item>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-list-item>
+                            <a class="side-menu-item" [routerLink]="['/productsAndServices']"
+                                routerLinkActive="router-link-active">
+                                Products & Services
+                            </a> </mat-list-item>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-list-item>
+                            <a class="side-menu-item" href="https://www.ventusky.com/?p=-26.9;24.7;4&l=temperature"
+                                routerLinkActive="router-link-active">
+                                Interactive Map
+
+                            </a>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            <a class="side-menu-item" [routerLink]="['/appspage']"
+                                routerLinkActive="router-link-active">
+                                Applications
+                            </a>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+
+            </div>
+            <!-- / SIDEBAR CONTENT -->
+
+        </fuse-sidebar>
+
+
+        <div fxFlex.gt-sm="55" fxFlex="95" #scrollMe style="overflow: scroll; height: xyz;">
+            <mat-card class="mb-8">
+                <h2>Problems and Solutions</h2>
+                <form [formGroup]="formGroup">
+                    <mat-vertical-stepper formArrayName="form" #stepper>
+                        <mat-step [formGroupName]="i"
+                            *ngFor="let customerGroup of formGroup.controls.form['controls']; let i = index">
+                            <ng-template matStepLabel>Step {{i + 1}}</ng-template>
+                            <div>
+                                <div *ngIf="!showResult(i)">
+                                    <app-flexable-problems-and-solutions *ngIf="!getIsRoutProblem(i)"
+                                        (myAdminOutput)='AdminChipClicked($event)' (myOutput)='ChipClicked($event)'
+                                        [myInput]=getStepResult(i) [Count]=getCount(i)>
+                                    </app-flexable-problems-and-solutions>
+                                    <app-flexable-route-problems-component *ngIf="getIsRoutProblem(i)"
+                                        (myOutput)='ChipClicked($event)' [myInput]=getStepResult(i) [Count]=getCount(i)>
+                                    </app-flexable-route-problems-component>
+                                </div>
+                                <app-solutionresult *ngIf="showResult(i)" [myInput]=getProblemSolutionResult()>
+                                </app-solutionresult>
+                            </div>
+                        </mat-step>
+                    </mat-vertical-stepper>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

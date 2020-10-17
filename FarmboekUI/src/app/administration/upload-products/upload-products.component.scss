@@ -1,0 +1,30 @@
+.uploadIcon {
+    font-size: 35px;
+    color: blue;
+    margin-top: -20px;
+    margin-left: -12px;
+}
+
+.myButton {
+    background: blue($color: #000000);
+}
+
+.edit-class{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    border: #2bc52b70;
+    border-style: solid;
+    border-width: 0.2px;
+    background: #f9f8f8a6;
+}
+
+.myActions{
+    margin-left: 5px;
+}
+
+.deleter{
+    position: absolute;
+    width: 150px;
+    right: 14em;
+    margin-top: 3em;
+}

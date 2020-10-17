@@ -1,0 +1,27 @@
+.icon {
+    border-radius: 10%;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
+
+drag-scroll {
+    height: 50px;
+    width: 100px;
+    background-color: #333;
+    white-space: nowrap;
+  }
+  .side-scroll-item{
+      color: white;
+  }
+  a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  drag-scroll a:hover{
+      background-color: #777;
+  }
+  

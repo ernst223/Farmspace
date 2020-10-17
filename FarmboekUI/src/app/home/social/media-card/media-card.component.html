@@ -1,0 +1,125 @@
+<div class="mat-card mat-elevation-z4 mb-16 p-16" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="start">
+    <div class="p-16" fxLayout="row" fxLayoutAlign="start center">
+        <img class="w-40 h-40 border-radius-100" src="assets/images/avatars/farmspaceLogo.png">
+
+        <div class="ml-16">
+            <div *ngIf="!editme">
+                <div *ngIf="!canShowLink()" class="h2 text-bold">{{thisMedia.title}}</div>
+                <div *ngIf="canShowLink()" class="h2 text-bold"><a href="{{thisMedia.webLink}}"
+                        style="color: black; cursor: pointer;">{{thisMedia.title}}</a></div>
+            </div>
+            <div *ngIf="editme">
+                <input matInput style="background-color: lightgray;" placeholder="Title of this post.."
+                    [(ngModel)]="titleTemp">
+            </div>
+
+            <div class="h5 text-bold secondary-text">{{thisMedia.mediaDate | date}}</div>
+            <div *ngIf="myIViewThis()">
+                <a (click)="editPost()" *ngIf="!editme" style="color: black; cursor: pointer;">
+                    <mat-icon style="margin-top: 10px;">edit</mat-icon>
+                </a>
+                <a (click)="saveEdit()" matTooltip="Save Edit" *ngIf="editme" style="color: green; cursor: pointer; margin-right: 10px;">
+                    <mat-icon style="margin-top: 10px;">done</mat-icon>
+                </a>
+                <a (click)="cancleEdit()" matTooltip="Cancel Edit" *ngIf="editme" style="color: red; cursor: pointer; margin-right: 10px;">
+                    <mat-icon style="margin-top: 10px;">cancel</mat-icon>
+                </a>
+                
+                <a *ngIf="editme" matTooltip="{{uploadImageLabel}}" style="cursor: pointer; margin-left: 20px; margin-top: 10px;"
+                    (click)="ImageFile.click()">
+                    <mat-icon class="IconStyle">perm_media</mat-icon>
+                </a>
+                <a (click)="removeImage()" matTooltip="Remove Image" *ngIf="editme" style="color: red; margin-left: 5px; cursor: pointer; margin-right: 10px;">
+                    <mat-icon style="margin-top: 10px;">grid_off</mat-icon>
+                </a>
+                <input hidden type="file" accept="image/gif, image/jpeg, image/png" id="Image" #ImageFile
+                    (change)="OpenImage($event)">
+                <a (click)="deleteMedia()" matTooltip="Delete Post" style="color: red; margin-left: 10px; cursor: pointer;">
+                    <mat-icon style="margin-top: 10px;">delete</mat-icon>
+                </a>
+                <!-- Image UPdate -->
+
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+        <div *ngIf="!editme" fxFlex="100" class="line-height-1.75" [innerHTML]="htmlToAdd">
+        </div>
+        <ngx-wig *ngIf="editme" [(ngModel)]="htmlToAddTemp" class="mb-24" fxFlex="100"
+            [placeholder]="'Enter post text content...'">
+        </ngx-wig>
+    </div>
+
+    <div fxFlex="100" *ngIf="thisMedia.youtubeLink" fxLayout="row wrap" fxLayoutAlign="center center">
+        <youtube-player width=auto [videoId]="thisMedia.youtubeLink" (ready)="savePlayer($event)"
+            (change)="onStateChange($event)">
+        </youtube-player>
+    </div>
+
+    <div *ngIf="!canShowLink()" fxLayout="row wrap" fxFlex="100">
+        <div *ngIf="thisMedia.imageUrl" fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="100">
+            <img style="max-height: 280px; max-width: 280px;" src="{{getImageUrl(thisMedia.imageUrl)}}">
+        </div>
+    </div>
+    <div *ngIf="canShowLink()" fxLayout="row wrap" fxFlex="100">
+        <a href="{{thisMedia.webLink}}">Follow Link</a>
+        <div *ngIf="thisMedia.imageUrl" fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="100">
+            <a href="{{thisMedia.webLink}}">
+                <img style="max-height: 280px; max-width: 280px;" src="{{getImageUrl(thisMedia.imageUrl)}}">
+            </a>
+        </div>
+    </div>
+
+    <!-- <div *ngIf="thisMedia.webLink" fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+        <ngx-link-preview [apiRoute]="thisMedia.webLink" [getApiEndpoint$]="apiCallbackFn"></ngx-link-preview>
+    </div> -->
+
+    <button *ngIf="thisMedia.likeStatus" (click)="likePost()" mat-button
+        style="margin: 5px; color: #98D703; font-size: 9.5px;">
+        <mat-icon>thumb_up</mat-icon> {{thisMedia.likeCount}}
+    </button>
+    <button *ngIf="!thisMedia.likeStatus" (click)="likePost()" mat-button style="margin: 5px; font-size: 9.5px;">
+        <mat-icon>thumb_up</mat-icon> {{thisMedia.likeCount}}
+    </button>
+    <button mat-button (click)="toggleCommentInput()" style="margin: 5px; font-size: 9.5px;">
+        <mat-icon>comment</mat-icon> {{thisMedia.commentCount}}
+    </button>
+    <button (click)="ShareClicked()" mat-button style="margin: 5px; font-size: 9.5px;">
+        <mat-icon>share</mat-icon>
+    </button><br>
+    <div fxFlex="100" *ngIf="showShare">
+
+        <share-buttons (click)="IncreaseShareCount()" [theme]="'circles-dark'"
+            [include]="['facebook','messenger','whatsapp']" [show]="3" [showCount]="true" [size]="2" [url]="myUrl"
+            [title]="myInput.title" [description]="thisMedia.title"
+            [image]="'https://farmspace.co.za/assets/images/logos/logo_small_farmspace.png'" [autoSetMeta]="false">
+        </share-buttons>
+    </div>
+    <div fxFlex="100" *ngIf="displayCommentInput">
+
+        <input matInput style="margin-bottom: 3px;" placeholder="Your Comment" fxFlex="80" [(ngModel)]="myComment">
+        <button (click)="postComment()" mat-button>
+            <mat-icon>send</mat-icon>
+        </button>
+
+    </div>
+    <div fxFlex="100" class="comment">
+        <!-- <div class="myComments">
+                        <img class="myImg" src="assets/images/avatars/farmboek.jpg" alt="Person" width="30" height="30">
+                       This is my dummy comment
+            </div> -->
+        <mat-chip-list [disabled]="false">
+            <div style="margin-top: 5px;" fxFlex=100 *ngFor="let item of thisMedia.mediaComments">
+                <mat-chip>
+                    <div class="comment-username  mr-8">{{item.userName}}</div>
+                    {{item.theComment}}
+                </mat-chip>
+            </div>
+        </mat-chip-list>
+        <div style="margin-top: 12px; margin-left: 28px;">
+            <a *ngIf="enableReadMore()" style="font-size: 16px" [routerLink]="['/home/media', thisMedia.mediaId]"
+                routerLinkActive="router-link-active">View More...</a>
+        </div>
+    </div>
+</div>

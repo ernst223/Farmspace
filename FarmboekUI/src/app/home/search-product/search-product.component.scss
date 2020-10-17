@@ -1,0 +1,48 @@
+.page-layout.simple {
+    min-width: auto;
+  }
+  .search-results {
+    height: 100vh;
+    overflow: scroll;
+    margin-top: 10px;
+    overflow-x: hidden;
+  }
+  
+  drag-scroll {
+    height: 50px;
+    width: 100px;
+    background-color: #333;
+    white-space: nowrap;
+  }
+  .side-scroll-item{
+      color: white;
+  }
+  a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  drag-scroll a:hover{
+      background-color: #777;
+  }
+  
+  .side-menu-img{ 
+      width: 25px;
+      padding: 0;
+  }
+  .chip-image{
+    height: auto;
+}
+
+.left-image-chip{
+    max-height: 100px;
+    height: auto;
+    width: auto;
+}
+
+.chip-text{
+    margin-left: 8px;
+    font-weight: 800;
+}

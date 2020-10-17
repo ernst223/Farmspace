@@ -1,0 +1,32 @@
+<div>
+        <mat-chip-list>
+                <div *ngFor="let entity of myInput">
+                        <div *ngIf="!AmIadmin()">
+                                <mat-chip *ngIf="entity.problem != undefined" color="primary"
+                                        (click)="ChipClicked(entity.id)">{{entity.problem}}</mat-chip>
+                        </div>
+                        <div *ngIf="AmIadmin()">
+                                <mat-chip *ngIf="entity.problem != undefined" color="primary"
+                                        (click)="ChipClicked(entity.id)">{{entity.problem}}</mat-chip>
+                                <a (click)="delete(entity.id)">
+                                        <mat-icon class="adminDeleteStyle pointer">delete</mat-icon>
+                                </a>
+                        </div>
+                </div>
+                <div *ngIf="AmIadmin()">
+                        <a *ngIf="!addBool" (click)="toggleAddBool()" class="pointer addAdmin">
+                                <mat-icon style="font-size: 30px;">add</mat-icon>
+                        </a>
+                        <div *ngIf="addBool">
+                                <input mat-input class="adminInput" [(ngModel)]="valueToAdd" placeholder="Description">
+                                <a class="pointer adminAdd" (click)="addValue()">
+                                        <mat-icon>done_outline</mat-icon>
+                                </a>
+                                <a class="pointer adminAdd" style="color: red;" (click)="toggleAddBool()">
+                                        <mat-icon>clear_outline</mat-icon>
+                                </a>
+                        </div>
+                </div>
+            </mat-chip-list>
+        
+</div>

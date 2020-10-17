@@ -1,0 +1,70 @@
+<div class="mat-card mat-elevation-z4 mb-16 p-16" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="start">
+
+    <div class="p-16" fxLayout="row" fxLayoutAlign="start center">
+        <img class="w-40 h-40 border-radius-100" src="assets/images/avatars/farmspaceLogo.logo">
+
+        <div class="ml-16">
+            <div class="h2 text-bold">{{thisMedia.title}}</div>
+            <div class="h5 text-bold secondary-text">{{thisMedia.mediaDate | date}}</div>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+        <div fxFlex="100" class="line-height-1.75" [innerHTML]="htmlToAdd">
+        </div>
+    </div>
+
+    <div fxFlex="100" *ngIf="thisMedia.youtubeLink" fxLayout="row wrap" fxLayoutAlign="start center">
+        <youtube-player [videoId]="thisMedia.youtubeLink" (ready)="savePlayer($event)" (change)="onStateChange($event)"></youtube-player>
+    </div>
+
+    <div *ngIf="thisMedia.imageUrl" fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+        <img style="max-height: 280px; max-width: 280px;" src="{{getImageUrl(thisMedia.imageUrl)}}">
+    </div>
+
+    <div *ngIf="thisMedia.webLink" fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+        <ngx-link-preview [apiRoute]="thisMedia.webLink" [getApiEndpoint$]="apiCallbackFn"></ngx-link-preview>
+    </div>
+
+    <button *ngIf="thisMedia.likeStatus" (click)="likePost()" mat-button
+        style="margin: 5px; color: #149de6; font-size: 9.5px;">
+        <mat-icon>thumb_up</mat-icon> {{thisMedia.likeCount}}
+    </button>
+    <button *ngIf="!thisMedia.likeStatus" (click)="likePost()" mat-button style="margin: 5px; font-size: 9.5px;">
+        <mat-icon>thumb_up</mat-icon> {{thisMedia.likeCount}}
+    </button>
+    <button mat-button (click)="toggleCommentInput()" style="margin: 5px; font-size: 9.5px;">
+        <mat-icon>comment</mat-icon> {{thisMedia.commentCount}}
+    </button>
+    <button mat-button style="margin: 5px; font-size: 9.5px;">
+        <mat-icon>share</mat-icon> {{thisMedia.shareCount}}
+    </button><br>
+    <div fxFlex="100" *ngIf="displayCommentInput">
+
+        <input matInput style="margin-bottom: 3px;" placeholder="Your Comment" fxFlex="80" [(ngModel)]="myComment">
+
+
+        <button (click)="postComment()" mat-button>
+            <mat-icon>send</mat-icon>
+        </button>
+
+    </div>
+    <div fxFlex="100" class="comment">
+        <!-- <div class="myComments">
+                        <img class="myImg" src="assets/images/avatars/farmboek.jpg" alt="Person" width="30" height="30">
+                       This is my dummy comment
+            </div> -->
+        <mat-chip-list [disabled]="false">
+            <div style="margin-top: 5px;" fxFlex=100 *ngFor="let item of thisMedia.mediaComments">
+                <mat-chip>
+                    <div class="comment-username  mr-8">{{item.userName}}</div>
+                    {{item.theComment}}
+                </mat-chip>
+            </div>
+        </mat-chip-list>
+        <div style="margin-top: 12px; margin-left: 28px;">
+            <a *ngIf="enableReadMore()" style="font-size: 16px" [routerLink]="['/home/media', thisMedia.mediaId]"
+                routerLinkActive="router-link-active">View More...</a>
+        </div>
+    </div>
+</div>

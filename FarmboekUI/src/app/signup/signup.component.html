@@ -1,0 +1,79 @@
+<div fxLayoutAlign="center start" fxFlex="100">
+    <div fxFlex.gt-sm="55" fxFlex="95">
+        <div class="mat-card mat-elevation-z4 mb-16 p-24" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="start">
+
+            <div class="logo" fxLayout="row" fxLayoutAlign="center center">
+                <img fxFlex="70" src="../../assets/images/logos/logo_small_farmspace.png">
+            </div>
+
+            <form fxLayout="row wrap" fxLayoutAlign="center center" novalidate [formGroup]="loginForm"
+                (ngSubmit)="register()">
+
+                <mat-form-field fxFlex="80">
+                    <input matInput formControlName="Name" type="text" placeholder="Firstname">
+                    <mat-error *ngIf="loginForm.controls['Name'].invalid">Your name is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="80">
+                    <input matInput formControlName="LastName" type="text" placeholder="Lastname">
+                    <mat-error *ngIf="loginForm.controls['LastName'].invalid">Your Lastname is required</mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="80">
+                    <input matInput formControlName="Email" type="text" placeholder="Email">
+                    <mat-error *ngIf="loginForm.controls['Email'].invalid">Your Email is required</mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="80">
+                    <input matInput formControlName="CEmail" type="text" placeholder="Confirm Email">
+                    <mat-error *ngIf="loginForm.controls['Email'].invalid">Your Email is required</mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="80">
+                    <input matInput formControlName="Cell" type="text" placeholder="Cell number">
+                    <mat-error *ngIf="loginForm.controls['Cell'].invalid">Your Cell number is required</mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="80">                
+                        <input type="text" placeholder="Country" matInput
+                            [matAutocomplete]="autoCategory" [formControl]="myControl">
+                        <mat-autocomplete #autoCategory="matAutocomplete"
+                            (optionSelected)="countrySelected($event)" [displayWith]="displayData">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    <mat-error>Category is required!</mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="80">
+                    <input matInput formControlName="Id" type="text" placeholder="ID number">
+                    <mat-error *ngIf="loginForm.controls['Email'].invalid">Your ID is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="80">
+                    <mat-label>Languages</mat-label>
+                    <mat-select [compareWith]="compareFn" name="languages" [(ngModel)]="selectedLanguages" [ngModelOptions]="{standalone: true}" multiple>
+                        <mat-option *ngFor="let a of allLanguages" [value]="a">
+                           {{ a.language }}
+                        </mat-option>
+                   </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field fxFlex="80">
+                    <input matInput formControlName="password" type="password" placeholder="Password">
+                    <mat-error *ngIf="loginForm.controls['password'].invalid">Your password is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="80">
+                    <input matInput formControlName="ConfirmPassword" type="password" placeholder="Confirm Password">
+                    <mat-error *ngIf="loginForm.controls['ConfirmPassword'].invalid">Your password is incorrect
+                    </mat-error>
+                </mat-form-field>
+
+                <button class="btn-sign-in" mat-raised-button fxFlex="25" color="warning"
+                    [disabled]="loginForm.invalid">
+                    Register
+                </button>
+                <mat-progress-spinner style="min-width: 10px" [diameter]="40" mode="indeterminate" *ngIf="isLoading">
+                </mat-progress-spinner>
+            </form>
+
+        </div>
+    </div>
+</div>

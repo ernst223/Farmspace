@@ -1,0 +1,21 @@
+<mat-card class="mb-16">
+        <div *ngIf="canIdisplay">
+            <h2>Supplier Brands</h2>
+                <mat-chip-list>
+                    <mat-chip
+                    class="chip-image"
+                        *ngFor="let entity of myBrands"
+                        color="primary"
+                        (click)="ChipClicked(entity.brandId)">
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                                <img   class="left-image-chip-brand"
+                                    src={{getImageConnectionString(entity.imageLink)}}
+                                />
+                            <div class="chip-text" fxFlex="grow" fxFlex.gt-md="fill">
+                                    {{entity.brandName}}
+                            </div>
+                        </div>
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+</mat-card>

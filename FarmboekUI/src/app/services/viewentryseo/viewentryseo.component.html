@@ -1,0 +1,58 @@
+<div fxLayoutAlign="center center">
+    <div fxFlex.gt-sm="55" fxFlex="95">
+        <mat-card *ngIf="showme">
+            <div>
+                    <mat-form-field fxFlex="30">
+                            <mat-label>Select Entry</mat-label>
+                            <mat-select [(ngModel)]="selectedLevel" (selectionChange)="selected()">
+                                <mat-option *ngFor="let item of myRanges" [value]="item.entryId">
+                                    {{item.entryName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+            </div>
+            <div *ngIf="AmIadmin()" style="margin-bottom: 10px;">
+                <button mat-raised-button color="warn"
+                (click)="ImageFile.click()">Upload PDF</button>
+                <input hidden type="file" accept="application/pdf" id="Image" #ImageFile
+                                (change)="OpenImage($event)">
+
+                <button style="margin-left: 20px" mat-raised-button color="warn"
+                (click)="deletePDF()">Delete PDF</button>
+            </div>
+            <button mat-raised-button color="warn"
+                (click)="openPDFConnectionString()">View PDF</button>
+
+            <h2>{{heading}}</h2>
+            <button style="margin: 10px" matTooltip="Enquire for this Entry" mat-raised-button color="primary"
+                (click)="enquire()">Enquire</button>
+            <img *ngIf="getImageConnectionString() != undefined" style="height:300px; width: auto;"
+                src="{{getImageConnectionString()}}">
+
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Brand</th>
+                            <td><a [routerLink]="['/details/brand',myBrand.brandId]">{{myBrand.name}}</a></td>
+                        </tr>
+                        <tr *ngFor="let entity of myAttributes">
+                            <th *ngIf="entity.value != undefined">{{entity.attribute}}</th>
+                            <td *ngIf="entity.value != undefined">{{entity.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-card>
+        <mat-card style="margin-top: 10px">
+            <mat-progress-bar *ngIf="!showMedia" mode="indeterminate"></mat-progress-bar>
+            <div *ngIf="showMedia">
+                <h1>{{mediaHeader}}</h1>
+                <div *ngFor="let item of myRelatedMedia">
+                    <!-- <app-media-card [myInput]=item></app-media-card> -->
+                    <app-media-product-card [myInput]=item></app-media-product-card>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

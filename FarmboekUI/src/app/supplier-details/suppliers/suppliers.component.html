@@ -1,0 +1,37 @@
+<div fxLayoutAlign="center center">
+    <div fxFlex.gt-sm="55" fxFlex="95">
+        <mat-card>
+            <div *ngIf="!canIdisplay">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+            <div *ngIf="canIdisplay">
+                <mat-vertical-stepper #stepper>
+                    <mat-step>
+                        <ng-template matStepLabel>Step 1: Choose Province</ng-template>
+                        <mat-chip-list>
+                            <!-- <mat-chip *ngFor="let entity of myInput" color="primary" (click)="ChipClicked(entity.id)">{{entity.problem}}</mat-chip> -->
+                            <mat-chip *ngFor="let entity of myProvinces" (click)="step1Clicked(entity.provinceId)"
+                                matStepperNext>{{entity.provinceName}}</mat-chip>
+                        </mat-chip-list>
+                    </mat-step>
+                    <mat-step [optional]="false">
+                        <ng-template matStepLabel>Step 2: Choose Supplier</ng-template>
+                        <mat-chip-list>
+                            <!-- <mat-chip *ngFor="let entity of myInput" color="primary" (click)="ChipClicked(entity.id)">{{entity.problem}}</mat-chip> -->
+                            <mat-chip class="chip-image" *ngFor="let entity of myStep2Suppliers"
+                                (click)="step2Clicked(entity.supplierId)">
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <img class="left-image-chip-supplier"
+                                        src={{getImageConnectionString(entity.imageName)}} />
+                                    <div class="chip-text" fxFlex="grow" fxFlex.gt-md="fill">
+                                        {{entity.supplierName}}
+                                    </div>
+                                </div>
+                            </mat-chip>
+                        </mat-chip-list>
+                    </mat-step>
+                </mat-vertical-stepper>
+            </div>
+        </mat-card> 
+    </div>
+</div>

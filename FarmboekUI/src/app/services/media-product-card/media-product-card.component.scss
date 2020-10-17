@@ -1,0 +1,32 @@
+.comment {
+    border-top: 0.5px solid black;
+}
+
+.myComments {
+    margin-top: 7px;
+    background-color: #f1f1f1;
+    border-radius: 25px;
+    font-size: 14px;
+}
+.customChip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    font-size: 13px;
+  }
+
+.myImg {
+  margin-right: 5px;
+    float: left;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-left: -10px;
+  }
+
+  .comment-username{
+    color: #585858;
+  }

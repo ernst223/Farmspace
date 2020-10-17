@@ -1,0 +1,30 @@
+<div fxLayout="row wrap" id="Container">
+    <h1 fxFlex="100">{{myHeader}}</h1>
+    <button style="margin: 10px" matTooltip="Products Associated with this Problem" mat-raised-button color="primary"
+        (click)="viewRemedies()" *ngIf="!showRemedies">All Supported Remedies</button>
+    <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start start">
+        <div fxFlex="20" *ngFor="let item of imageNames">
+            <img class="problem-image" src={{item}}>
+        </div>
+    </div>
+    <div fxFlex="100">
+        <h2>Information</h2>
+        <p>{{myInput.information}}</p>
+    </div>
+    <div fxFlex="100">
+        <h2>Symptoms</h2>
+        <p>{{myInput.symptoms}}</p>
+    </div>
+    <div fxFlex="100">
+        <h2>Economic Impact</h2>
+        <p>{{myInput.epidemiology}}</p>
+    </div>
+    <div>
+        <h3>Reference</h3>
+        <p>{{myInput.morbidity}}</p>
+    </div>
+    
+    <!-- <div *ngIf="showRemedies">
+            <app-remedies [myInput]=getRemedies() (myOutput)='changeShowRemedies()'></app-remedies>
+    </div> -->
+</div>

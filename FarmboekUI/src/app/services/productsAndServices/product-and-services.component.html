@@ -1,0 +1,58 @@
+<div fxLayout="row wrap">
+
+    <drag-scroll fxFlex="100"  fxHide.gt-md>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/problemsAndSolutions']"
+            routerLinkActive="router-link-active">Problems
+            &
+            Solutions</a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/productsAndServices']"
+            routerLinkActive="router-link-active">
+            Products & Services
+        </a>
+        <a drag-scroll-item class="side-scroll-item" href="https://www.ventusky.com/?p=-26.9;24.7;4&l=temperature"
+            routerLinkActive="router-link-active">
+            Interactive Map
+
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/appspage']" routerLinkActive="router-link-active">
+            Applications
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/home/videoMedia']" routerLinkActive="router-link-active">
+            Videos
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/home/articleMedia']" routerLinkActive="router-link-active">
+            Articles
+        </a>
+    </drag-scroll>
+
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+
+
+
+        <div fxFlex.gt-sm="55" fxFlex="95">
+            <mat-card class="mb-8">
+                <h2>Product And Services</h2>
+                <form [formGroup]="formGroup">
+                    <mat-vertical-stepper formArrayName="form" #stepper>
+                        <mat-step [formGroupName]="i"
+                            *ngFor="let customerGroup of formGroup.controls.form['controls']; let i = index">
+                            <ng-template matStepLabel>Step {{i + 1}}</ng-template>
+                            <div>
+                                <div *ngIf="!showResult(i)">
+                                    <app-flexable-commercial-component *ngIf="!getIsRoutProblem(i)"
+                                        (myAdminOutput)='AdminChipClicked($event)' (myOutput)='ChipClicked($event)'
+                                        [myInput]=getStepResult(i) [Count]=getCount(i)>
+                                    </app-flexable-commercial-component>
+                                    <app-flexable-route-entry *ngIf="getIsRoutProblem(i)"
+                                        (myOutput)='ChipClicked($event)' [myInput]=getStepResult(i) [Count]=getCount(i)>
+                                    </app-flexable-route-entry>
+                                </div>
+                                <!-- Flexable route component commercial  ng if showResult(i) -->
+                            </div>
+                        </mat-step>
+                    </mat-vertical-stepper>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

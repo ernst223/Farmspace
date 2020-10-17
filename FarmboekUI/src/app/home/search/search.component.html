@@ -1,0 +1,124 @@
+<div>
+    <div>
+        <mat-progress-bar></mat-progress-bar>
+    </div>
+<div *ngIf="showme" fxLayout="row wrap">
+    <drag-scroll fxFlex="100" fxShow.lt-md fxHide>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/problemsAndSolutions']"
+            routerLinkActive="router-link-active">Problems
+            &
+            Solutions</a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/productsAndServices']"
+            routerLinkActive="router-link-active">
+            Products & Services
+        </a>
+        <a drag-scroll-item class="side-scroll-item" href="https://www.ventusky.com/?p=-26.9;24.7;4&l=temperature"
+            routerLinkActive="router-link-active">
+            Interactive Map
+
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/appspage']" routerLinkActive="router-link-active">
+            Applications
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/home/videoMedia']" routerLinkActive="router-link-active">
+            Videos
+        </a>
+        <a drag-scroll-item class="side-scroll-item" [routerLink]="['/home/articleMedia']" routerLinkActive="router-link-active">
+            Articles
+        </a>
+    </drag-scroll>
+
+
+
+    <div fxFlex="100" fxLayout="row" fxLayoutAlign="center start">
+
+        <div class="mb-8" fxFlex.gt-sm="55" fxFlex="95" fxLayout="row" fxLayout.lt-md="column">
+            <div style="margin-top: 10px; height: fit-content;" fxHide.lt-md fxFlex="33" fxLayout="row wrap">
+                <div fxFlex="100">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <a class="side-menu-img" [routerLink]="['/problemsAndSolutions']"
+                            routerLinkActive="router-link-active"><img
+                                src="../../../../assets/images/navigation-images/problemsandsolutions.png" alt=""></a>
+                        <button [ngStyle.xs]="{'font-size': '9px', 'padding': '0px', 'margin': '0px' }" type="button"
+                            class="nav-button" [routerLink]="['/problemsAndSolutions']"
+                            routerLinkActive="router-link-active" style="margin: 10px" matTooltip="Solutions"
+                            mat-button>Problems
+                            &
+                            Solutions</button>
+                    </div>
+                </div>
+                <div fxFlex="100">
+                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                        <a class="side-menu-img" [routerLink]="['/productsAndServices']" routerLinkActive="router-link-active" >
+                            <img src="../../../../assets/images/navigation-images/productsandservices.png" alt="">
+                        </a>
+                        <button [ngStyle.sm]="{'font-size': '9px', 'padding': '0px', 'margin': '0px' }" type="button"
+                            class="nav-button" [routerLink]="['/productsAndServices']"
+                            routerLinkActive="router-link-active" style="margin: 10px" matTooltip="Products"
+                            mat-button>Products & Services</button>
+                    </div>
+                </div>
+
+                <div fxFlex="100">
+                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                        <a class="side-menu-img" href="https://www.ventusky.com/?p=-26.9;24.7;4&l=temperature"
+                            routerLinkActive="router-link-active" fxFlex="10">
+                            <img style="margin-top: 10px"
+                                src="../../../../assets/images/navigation-images/interactivemap.png" alt="">
+                        </a>
+                        <button [ngStyle.xs]="{'font-size': '9px', 'padding': '0px', 'margin': '0px' }" type="button"
+                            onclick="window.location.href = 'https://www.ventusky.com/?p=-26.9;24.7;4&l=temperature';"
+                            class="nav-button" routerLinkActive="router-link-active" style="margin: 10px"
+                            matTooltip="Live Weather Map" mat-button>Interactive Map</button>
+                    </div>
+                </div>
+                <div fxFlex="100">
+                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                        <a class="side-menu-img" [routerLink]="['/appspage']" routerLinkActive="router-link-active" >
+                            <img style="margin-top: 10px"
+                                src="../../../../assets/images/navigation-images/applications.png" alt="">
+                        </a>
+                        <button [ngStyle.xs]="{'font-size': '9px', 'padding': '0px', 'margin': '0px' }" type="button"
+                            [routerLink]="['/appspage']" class="nav-button" routerLinkActive="router-link-active"
+                            style="margin: 10px" matTooltip="View all applications" mat-button>Applications</button>
+                    </div>
+                </div>
+                <div fxFlex="100">
+                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                        <a class="side-menu-img" [routerLink]="['/home/videoMedia']" routerLinkActive="router-link-active" >
+                            <img style="margin-top: 10px"
+                                src="../../../../assets/images/navigation-images/videoMedia.png" alt="">
+                        </a>
+                        <button [ngStyle.xs]="{'font-size': '9px', 'padding': '0px', 'margin': '0px' }" type="button"
+                            [routerLink]="['/home/videoMedia']" class="nav-button" routerLinkActive="router-link-active"
+                            style="margin: 10px" matTooltip="View Latest Videos" mat-button>Videos</button>
+                    </div>
+                </div>
+                <div fxFlex="100">
+                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                        <a class="side-menu-img" [routerLink]="['/home/articleMedia']" routerLinkActive="router-link-active" >
+                            <img style="margin-top: 10px"
+                                src="../../../../assets/images/navigation-images/articleMedia.png" alt="">
+                        </a>
+                        <button [ngStyle.xs]="{'font-size': '9px', 'padding': '0px', 'margin': '0px' }" type="button"
+                            [routerLink]="['/home/articleMedia']" class="nav-button" routerLinkActive="router-link-active"
+                            style="margin: 10px" matTooltip="View Latest Articles" mat-button>Articles</button>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row wrap" fxFlex.gt-sm="65" class="inner-scroll" fxLayoutAlign="center center">
+                
+                <div fusePerfectScrollbar class="search-results" fxFlex="100" infiniteScroll
+                    [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+                    [scrollWindow]="false">
+                    <button mat-button style="font-size: 20px; "  (click)="searchMediaProduct()" cdkFocusInitial>Search in Products -></button>
+                        <div *ngFor="let item of Posts">
+                            <app-media-card [myInput]=item></app-media-card>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

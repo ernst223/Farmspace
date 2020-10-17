@@ -1,0 +1,91 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card style="margin-top: 10px; margin-bottom: 10px;" class="mat-card tab-row" fxFlex.gt-sm="55" fxFlex="95" fxLayout="row">
+        <div id="Container">
+            <h1>All Supported Remedies</h1>
+                <mat-chip-list>
+                        <mat-chip *ngFor="let entity of myInput" color="primary" (click)="chipClicked(entity.productBaseId)">{{entity.name}}</mat-chip>
+                    </mat-chip-list>
+                    <div *ngIf="showDetails">
+                        <h2>{{remedyDetails.name}} Details</h2>
+                        
+                        <div *ngIf="AmIadmin()" style="margin-bottom: 10px;">
+                            <button mat-raised-button color="warn"
+                            (click)="ImageFile.click()">Upload PDF</button>
+                            <input hidden type="file" accept="application/pdf" id="Image" #ImageFile
+                                            (change)="OpenImage($event)">
+            
+                            <button style="margin-left: 20px" mat-raised-button color="warn"
+                            (click)="deletePDF()">Delete PDF</button>
+                        </div>
+                        <button mat-raised-button color="warn"
+                            (click)="openPDFConnectionString()">View PDF</button>
+
+                        <button style="margin: 10px" matTooltip="Enquire for this Product" mat-raised-button color="primary" (click)="enquire()" >Enquire</button>
+                        <img *ngIf="remedyDetails.imageLink != undefined" class="product-image" style="height: 100px; width: 100px;" src="{{getImageConnectionString(remedyDetails.imageLink)}}">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        Brand
+                                    </th>
+                                    <td>
+                                        <a [routerLink]="['/details/brand',brand.brandId]">{{brand.name}}</a>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="remedyDetails.registration != undefined">
+                                    <th>
+                                        Registration
+                                    </th>
+                                    <td>
+                                        {{remedyDetails.registration}}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="remedyDetails.formulation != undefined">
+                                    <th>
+                                        Formulation
+                                    </th>
+                                    <td>
+                                        {{remedyDetails.formulation}}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="remedyDetails.concentration != undefined">
+                                    <th>
+                                        Concentration
+                                    </th>
+                                    <td>
+                                        {{remedyDetails.concentration}}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="showActiveIngredient()">
+                                    <th>
+                                        Active Ingredients
+                                    </th>
+                                    <td>
+                                        <div *ngFor="let item of myActiveIngredients">
+                                            <p>{{item.name}}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th >
+                                        Problems
+                                    </th>
+                                    <td>
+                                        <div *ngIf="!displayRemedyProblems">
+                                                <mat-spinner></mat-spinner>
+                                        </div>
+                                        <div *ngIf="displayRemedyProblems">
+                                                <div *ngFor="let item of remedyProblems">
+                                                        <!-- <a [routerLink]="['/problemsAndSolutions/problembase',item.problemBaseId]">{{item.description}}</a> -->
+                                                        <a (click)="goToProblemBaseSeo(item.problemBaseId)">{{item.description}}</a>
+                                                    </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+        </div>        
+    </mat-card>
+</div>
+    
